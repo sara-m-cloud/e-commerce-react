@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.active{
+    border-bottom:3px solid white ;
+}
+
+/* .slick-next {
+    right: 0px;
+} */
+
+.slick-prev, .slick-next{
+    display: none !important;
+}
+
+.slick-dots{
+
+    position: static;
+}
+
+/* .slick-slide img{
+    display:inline;
+} */
