@@ -3,8 +3,7 @@
 // import viteLogo from '/vite.svg'
 // import './App.css'
 
-import { createBrowserRouter, RouterProvider } from "react-router-dom"
-
+import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom"
 import Login from "./components/Login/Login";
 import NotFound from './components/NotFound/NotFound';
 import Register from "./components/Register/Register";
@@ -24,21 +23,27 @@ import Products from "./components/Products/Products";
 
 
 
-
-const router=createBrowserRouter([
-  {path:'',element:<Layout/> ,children:[
-    {path:'register',element:<Register/>},
-    {path:'Home',element:<Home/>},
-    {path:'Products',element:<Test><Products/></Test>},
-  {path:'Categories',element: <Test><Categories/></Test>},
-   {path:'Brands',element:<Test><Brands/></Test>},
-  {path:'Cart',element:<Test><Cart/></Test>},
-  {path:'ProductDetails/:id',element:<Test><ProductDetails/></Test>},
-    {path:'login' ,element:<Login/>},
-    {path:"*" ,element:<NotFound/> }
-  ]},
-  
-])
+const router = createBrowserRouter([
+  {
+    path: '',
+    element: <Layout />,
+    children: [
+      { index: true, element: localStorage.getItem('tkn') ? <Navigate to='/Home' replace /> : <Navigate to='/Login' replace /> }, // ✅ هنا
+      { path: 'register', element: <Register /> },
+      { path: 'login', element: <Login /> },
+      { path: 'Home', element: <Home /> },
+      { path: 'Products', element: <Test><Products /></Test> },
+      { path: 'Categories', element: <Test><Categories /></Test> },
+      { path: 'Brands', element: <Test><Brands /></Test> },
+      { path: 'Cart', element: <Test><Cart /></Test> },
+      { path: 'ProductDetails/:id', element: <Test><ProductDetails /></Test> },
+      { path: '*', element: <NotFound /> },
+    ],
+  },
+],
+{
+  basename: '/e-commerce-react/'
+  })
 
 
 const client=new QueryClient();
